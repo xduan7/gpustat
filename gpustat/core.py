@@ -196,7 +196,7 @@ class GPUStat(object):
         colors = {}
 
         def _conditional(cond_fn, true_value, false_value,
-                         error_value=term.bold_black):
+                         error_value=term.bold_white):
             try:
                 return cond_fn() and true_value or false_value
             except Exception:
@@ -214,12 +214,12 @@ class GPUStat(object):
         colors['FSpeed'] = _conditional(lambda: self.fan_speed < 30,
                                         term.cyan, term.bold_cyan)
         colors['CMemU'] = _conditional(lambda: self.available,
-                                       term.bold_yellow, term.bold_black)
+                                       term.bold_yellow, term.bold_white)
         colors['CMemT'] = _conditional(lambda: self.available,
-                                       term.yellow, term.bold_black)
+                                       term.yellow, term.bold_white)
         colors['CMemP'] = term.yellow
         colors['CCPUMemU'] = term.yellow
-        colors['CUser'] = term.bold_black   # gray
+        colors['CUser'] = term.bold_white   # gray
         colors['CUtil'] = _conditional(lambda: self.utilization < 30,
                                        term.green, term.bold_green)
         colors['CUtilEnc'] = _conditional(
@@ -658,7 +658,7 @@ class GPUStatCollection(object):
                 timestr = self.query_time.strftime(time_format)
             header_template = '{t.bold_white}{hostname:{width}}{t.normal}  '
             header_template += '{timestr}  '
-            header_template += '{t.bold_black}{driver_version}{t.normal}'
+            header_template += '{t.bold_white}{driver_version}{t.normal}'
 
             header_msg = header_template.format(
                     hostname=self.hostname,
